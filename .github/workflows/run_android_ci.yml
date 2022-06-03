@@ -47,6 +47,7 @@ jobs:
         with:
           java-version: '11'
       - run: gem install cocoapods
+      - run: gem install bundler
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: 2.10.4
