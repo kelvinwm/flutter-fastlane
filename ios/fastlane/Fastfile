@@ -30,15 +30,12 @@ platform :ios do
     register_devices(devices_file: "fastlane/devices.txt")
   end
   lane :betaus do
-    sync_code_signing
-    Dir.chdir("../..") do
-      sh "flutter build ipa"
-    end
-#           upload_to_testflight(
-#              api_key: api_key,
-#              groups: ["First Beta Group"],
-#              app_identifier: "com.beyondthehorizon.route",
-#              skip_waiting_for_build_processing: true
-#           )
+  # Before calling match, we make sure all our devices are registered on the Apple Developer Portal
+    register_devices(devices_file: "fastlane/devices.txt")
+
+    # After registering the new devices, we'll make sure to update the provisioning profile if necessary
+    # Note how we make sure to pass "adhoc" to get and use a provisioning profile for Ad Hoc distribution
+    sync_code_signing(force_for_new_devices: true, type: "development")
+#     build_app
   end
 end

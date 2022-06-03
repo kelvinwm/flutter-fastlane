@@ -37,27 +37,27 @@ on:
 #          run: flutter build appbundle --flavor prod --no-sound-null-safety
 
 
-#jobs:
-#  build_ios:
-#    name: Build Flutter (iOS)
-#    runs-on: macos-latest
-#    steps:
-#      - uses: actions/checkout@v1
-#      - uses: actions/setup-java@v1
-#        with:
-#          java-version: '11'
-#      - run: gem install cocoapods
-#      - run: gem install bundler
-#      - uses: subosito/flutter-action@v1
-#        with:
-#          flutter-version: 2.10.4
-#      - run: flutter clean
-#      - run: flutter pub get
-#      - uses: maierj/fastlane-action@v1.4.0
-#        with:
-#          lane: sync_all_development
-#          subdirectory: ios
-#      - run: flutter build ios --release --no-codesign --flavor dev
+jobs:
+  build_ios:
+    name: Build Flutter (iOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - run: gem install cocoapods
+      - run: gem install bundler
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: 2.10.4
+      - run: flutter clean
+      - run: flutter pub get
+      - uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: betaus
+          subdirectory: ios
+      #      - run: flutter build ios --release --no-codesign --flavor dev
       #      - name: Upload iPA
       #        uses: actions/upload-artifact@master
       #        with:
@@ -66,53 +66,20 @@ on:
 
 
 
-jobs:
-  build:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '11'
-
-      - name: Bundle dependencies
-        run: bundle install
-
-      - name: CocoaPods dependencies
-        run: bundle exec pod install
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: 2.10.4
-
-      - name: Run Flutter clean
-        run: flutter clean
-
-      - name: Install Flutter dependencies
-        run: flutter pub get
-
-      - name: Run Fastlane
-        uses: maierj/fastlane-action@v1.4.0
-        with:
-          lane: betaus
-          subdirectory: ios
-
       #  deploy_ios:
       #    runs-on: macos-latest
       #    steps:
       #      - name: Export Release Timestamp
       #        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%M.%S')" >> $GITHUB_ENV
       #      - name: Checkout repository
-#              uses: actions/checkout@v1
-#            - name: Set up Java
-#              uses: actions/setup-java@v2
-#              with:
-#                java-version: '15'
+      #        uses: actions/checkout@v1
+      #      - name: Set up Java
+      #        uses: actions/setup-java@v2
+      #        with:
+      #          java-version: '15'
       #          distribution: 'adopt'
-#            - name: Install Cocoapods
-#              run: gem install cocoapods
+      #            - name: Install Cocoapods
+      #              run: gem install cocoapods
       #      - name: Setup flutter
       #        uses: subosito/flutter-action@v1
       #        with:
