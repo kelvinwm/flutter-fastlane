@@ -16,26 +16,9 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
+  desc "Push a new beta build to TestFlight"
   lane :beta do
-    # add actions here: https://docs.fastlane.tools/actions
-  end
-  lane :sync_code_signing do
-    sync_device_info
-    match(type: "development",
-          git_basic_authorization: Base64.strict_encode64("kelvinwm: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")
-          )
-  end
-  lane :sync_device_info do
-    register_devices(devices_file: "fastlane/devices.txt")
-  end
-  lane :betaus do
-  # Before calling match, we make sure all our devices are registered on the Apple Developer Portal
-    register_devices(devices_file: "fastlane/devices.txt")
-
-    # After registering the new devices, we'll make sure to update the provisioning profile if necessary
-    # Note how we make sure to pass "adhoc" to get and use a provisioning profile for Ad Hoc distribution
-    sync_code_signing(force_for_new_devices: true, type: "development")
-#     build_app
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+#     upload_to_testflight
   end
 end
