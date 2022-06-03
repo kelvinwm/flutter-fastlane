@@ -23,10 +23,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Description of what the lane does
 
-### ios sync_all_development
+### ios sync_code_signing
 
 ```sh
-[bundle exec] fastlane ios sync_all_development
+[bundle exec] fastlane ios sync_code_signing
 ```
 
 
@@ -35,6 +35,14 @@ Description of what the lane does
 
 ```sh
 [bundle exec] fastlane ios sync_device_info
+```
+
+
+
+### ios betaus
+
+```sh
+[bundle exec] fastlane ios betaus
 ```
 
 

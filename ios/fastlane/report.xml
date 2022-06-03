@@ -5,22 +5,32 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000203">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000184">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: Switch to ios sync_device_info lane" time="0.000125">
+      <testcase classname="fastlane.lanes" name="1: Switch to ios sync_code_signing lane" time="6.5e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: register_devices" time="3.787202">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios sync_device_info lane" time="8.3e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: match" time="10.993138">
+      <testcase classname="fastlane.lanes" name="3: register_devices" time="3.059254">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: match" time="14.530347">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: flutter build ipa" time="28.065001">
         
       </testcase>
     

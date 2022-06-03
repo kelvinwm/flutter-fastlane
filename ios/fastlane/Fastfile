@@ -20,11 +20,25 @@ platform :ios do
   lane :beta do
     # add actions here: https://docs.fastlane.tools/actions
   end
-  lane :sync_all_development do
+  lane :sync_code_signing do
     sync_device_info
-    match(type: "development")
+    match(type: "development",
+          git_basic_authorization: Base64.strict_encode64("kelvinwm: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")
+          )
   end
   lane :sync_device_info do
     register_devices(devices_file: "fastlane/devices.txt")
+  end
+  lane :betaus do
+    sync_code_signing
+    Dir.chdir("../..") do
+      sh "flutter build ipa"
+    end
+#           upload_to_testflight(
+#              api_key: api_key,
+#              groups: ["First Beta Group"],
+#              app_identifier: "com.beyondthehorizon.route",
+#              skip_waiting_for_build_processing: true
+#           )
   end
 end
