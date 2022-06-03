@@ -1,0 +1,55 @@
+name: Internal Playstore deployment
+on:
+  push:
+    branches:
+#      - bg-fix-transactions
+      - staging
+
+jobs:
+  #CD
+    build_android:
+      name: Building Android
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+        - name: Setup Java
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+        - name: Decrypt Android keys
+          run: sh ./.github/scripts/decrypt_android_secrets.sh
+          env:
+            ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
+        - name: Setup Flutter
+          uses: subosito/flutter-action@v1
+          with:
+            flutter-version: 2.10.4
+        - name: Make envfile
+          uses: SpicyPizza/create-envfile@v1.3
+          with:
+            envkey_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+            envkey_CLIENT_SECRETE: ${{ secrets.CLIENT_SECRETE }}
+            envkey_TERMINAL_ID: ${{ secrets.TERMINAL_ID }}
+            envkey_MERCHANT_ID: ${{ secrets.MERCHANT_ID }}
+            envkey_DOMAIN: ${{ secrets.DOMAIN }}
+            envkey_ORDER_ID_PREFIX: ${{ secrets.ORDER_ID_PREFIX }}
+            envkey_CURRENCY_CODE: ${{ secrets.CURRENCY_CODE }}
+            directory: assets
+            file_name: .env
+            fail_on_empty: false
+        - name: Run Flutter clean
+          run: flutter clean
+        - name: Install Flutter dependencies
+          run: flutter pub get
+          # Add build runner commands here if you have any
+        - name: Build the app bundle
+          run: flutter build appbundle
+
+        - name: Run Fastlane
+          uses: maierj/fastlane-action@v1.4.0
+          with:
+            lane: closed_beta
+            subdirectory: android
+
+

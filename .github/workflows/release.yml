@@ -1,0 +1,43 @@
+name: Playstore deployment
+on:
+  push:
+    branches:
+      - main
+jobs:
+  #CD
+  build_android:
+    name: Building Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Decrypt Android keys
+        run: sh ./.github/scripts/decrypt_android_secrets.sh
+        env:
+          ANDROID_KEYS_SECRET_PASSPHRASE: ${{ secrets.ANDROID_KEYS_SECRET_PASSPHRASE }}
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: 2.10.4
+      - name: Run Flutter clean
+        run: flutter clean
+      - name: Install Flutter dependencies
+        run: flutter pub get
+        # Add build runner commands here if you have any
+      - name: Build the app bundle
+        run: flutter build appbundle --flavor prod --no-sound-null-safety
+      - name: Upload artifact to Github
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.aab
+          path: build/app/outputs/bundle/release/app-release.aab
+
+      - name: Run Fastlane
+        uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: release_version
+          subdirectory: android
