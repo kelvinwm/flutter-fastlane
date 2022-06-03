@@ -54,7 +54,7 @@ jobs:
       - run: flutter pub get
       - uses: maierj/fastlane-action@v1.4.0
         with:
-          lane: beta
+          lane: sync_all_development
           subdirectory: ios
 #      - run: flutter build ios --release --no-codesign --flavor dev
       #      - name: Upload iPA
