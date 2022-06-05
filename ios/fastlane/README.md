@@ -15,29 +15,21 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios beta
+### ios build_ipa
 
 ```sh
-[bundle exec] fastlane ios beta
+[bundle exec] fastlane ios build_ipa
 ```
 
-Description of what the lane does
+Build ipa
 
-### ios sync_all_development
+### ios build_staging_ipa
 
 ```sh
-[bundle exec] fastlane ios sync_all_development
+[bundle exec] fastlane ios build_staging_ipa
 ```
 
-
-
-### ios sync_device_info
-
-```sh
-[bundle exec] fastlane ios sync_device_info
-```
-
-
+Build a staging ipa
 
 ----
 

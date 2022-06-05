@@ -1,4 +1,4 @@
-# This file contains the fastlane.tools configuration
+# Working flatlane file on route:  # This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
 #
 # For a list of all available actions, check out
@@ -13,55 +13,63 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-# default_platform(:ios)
-#
-# platform :ios do
-#   desc "Push a new beta build to TestFlight"
-#   lane :beta do
-#     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-# #     upload_to_testflight
-#   end
-# end
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :beta do
-#       api_key = app_store_connect_api_key(
-#         key_id: "K73ZGL55QX",
-#         issuer_id: "059aa589-88cb-48fb-b7c5-4aa58ba52aed",
-#         key_content: "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ25IUEsvUERJRjh0QklTbmIKNCtJZGFkRzlGOW9LR3laTnpLVHRsc0dpa0pxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFUUU01N1dRVXA1WEMrNQp2TDBJbU1KTnUvRTcyTnFpU0pqSlM0NEgzRTNDWnlSMW1PenZkeFM3Qm5PNTFCWS9UWFprb1BoTTBYQUJtNnF4Ckl2bjlsRVRuCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0="
-#       )
-       match(
-          type: 'appstore',
-          git_url: "https://github.com/kelvinwm/match-demo-certifacates.git",
-          git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
-          app_identifier: ["com.beyondthehorizon.superAction"],
-          readonly: true,
-          MATCH_PASSWORD:"0728306459"
-#            keychain_name: "kelvinwmblogs@gmail.com",
-#                 keychain_password: keychain_password
-        )
 
-      Dir.chdir("../..") do
-          sh "flutter build ipa "
-        end
-  end
-  lane :sync_all_development do
-#     sync_device_info
-    match(
-    type: "development",
-     readonly: true,
-     clone_branch_directly: true,
-# #     git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
-#
-#  git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
-#   type: "appstore"
-    )
-
-#     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-  end
-  lane :sync_device_info do
-    register_devices(devices_file: "fastlane/devices.txt")
-  end
+before_all do
+    ENV["MATCH_PASSWORD"] = "0728306459"
 end
+
+desc "Build ipa"
+  lane :build_ipa do
+       api_key = app_store_connect_api_key(
+         key_id: "K73ZGL55QX",
+         issuer_id: "059aa589-88cb-48fb-b7c5-4aa58ba52aed",
+         key_filepath: "fastlane/testkey.p8",
+         duration: 1200,
+         in_house: false
+        )
+          match(
+            git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
+            type: 'appstore',
+#             app_identifier: ["com.beyondthehorizon.route"],
+            api_key: api_key,
+            readonly: true
+          )
+
+        Dir.chdir("../..") do
+          sh "flutter build ipa"
+
+     end
+    end
+
+desc "Build a staging ipa"
+  lane :build_staging_ipa do
+       api_key = app_store_connect_api_key(
+         key_id: "H5XN5LCL24",
+         issuer_id: "bf4dfdbc-e07f-415c-9cbc-00d748d33e5a",
+         key_filepath: "fastlane/AuthKey_H5XN5LCL24.p8",
+         duration: 1200,
+         in_house: false
+        )
+          match(
+            type: 'appstore',
+            app_identifier: ["com.beyondthehorizon.route"],
+            api_key: api_key,
+            readonly: true
+          )
+
+        Dir.chdir("../..") do
+          sh "flutter build ipa"
+          upload_to_testflight(
+             api_key: api_key,
+             groups: ["First Beta Group"],
+             app_identifier: "com.beyondthehorizon.route",
+             skip_waiting_for_build_processing: true
+          )
+
+     end
+    end
+
+  end
