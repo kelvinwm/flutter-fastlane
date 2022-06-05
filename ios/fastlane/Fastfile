@@ -30,13 +30,13 @@ desc "Build ipa"
          duration: 1200,
          in_house: false
         )
-          match(
-            git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
-            type: 'appstore',
-#             app_identifier: ["com.beyondthehorizon.route"],
-            api_key: api_key,
-            readonly: true
-          )
+
+      match(
+#         git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
+        type: 'appstore',
+        api_key: api_key,
+        readonly: true
+      )
 
         Dir.chdir("../..") do
           sh "flutter build ipa"
