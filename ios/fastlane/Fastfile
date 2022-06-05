@@ -27,6 +27,17 @@ default_platform(:ios)
 platform :ios do
   desc "Description of what the lane does"
   lane :beta do
+      api_key = app_store_connect_api_key(
+        key_id: "K73ZGL55QX",
+        issuer_id: "059aa589-88cb-48fb-b7c5-4aa58ba52aed",
+        key_content: "LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ25IUEsvUERJRjh0QklTbmIKNCtJZGFkRzlGOW9LR3laTnpLVHRsc0dpa0pxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFUUU01N1dRVXA1WEMrNQp2TDBJbU1KTnUvRTcyTnFpU0pqSlM0NEgzRTNDWnlSMW1PenZkeFM3Qm5PNTFCWS9UWFprb1BoTTBYQUJtNnF4Ckl2bjlsRVRuCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0="
+      )
+       match(
+          type: 'appstore',
+          api_key: api_key,
+          readonly: true
+        )
+
       Dir.chdir("../..") do
           sh "flutter build ipa "
         end
