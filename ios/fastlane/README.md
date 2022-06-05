@@ -21,7 +21,23 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios beta
 ```
 
-Push a new beta build to TestFlight
+Description of what the lane does
+
+### ios sync_all_development
+
+```sh
+[bundle exec] fastlane ios sync_all_development
+```
+
+
+
+### ios sync_device_info
+
+```sh
+[bundle exec] fastlane ios sync_device_info
+```
+
+
 
 ----
 
