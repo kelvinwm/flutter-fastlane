@@ -35,9 +35,12 @@ platform :ios do
        match(
           type: 'appstore',
           git_url: "https://github.com/kelvinwm/match-demo-certifacates.git",
-          git_basic_authorization: Base64.encode64("kelvinwm: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"),
+          git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
           app_identifier: ["com.beyondthehorizon.superAction"],
-          readonly: true
+          readonly: true,
+          MATCH_PASSWORD:"0728306459"
+#            keychain_name: "kelvinwmblogs@gmail.com",
+#                 keychain_password: keychain_password
         )
 
       Dir.chdir("../..") do
