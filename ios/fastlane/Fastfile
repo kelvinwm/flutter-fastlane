@@ -32,7 +32,7 @@ desc "Build ipa"
         )
 
       match(
-        type: 'appstore',
+        type: 'development',
         api_key: api_key,
         readonly: true
       )
@@ -52,7 +52,7 @@ desc "Build ipa"
 #         Dir.chdir("../..") do
 #           sh "flutter build ipa"
 
-     end
+#      end
     end
 
 desc "Build a staging ipa"
