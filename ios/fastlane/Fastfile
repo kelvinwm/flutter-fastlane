@@ -36,6 +36,7 @@ platform :ios do
           type: 'appstore',
           git_url: "https://github.com/kelvinwm/match-demo-certifacates.git",
           git_basic_authorization: Base64.encode64("kelvinwm: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"),
+          app_identifier: ["com.beyondthehorizon.superAction"],
           readonly: true
         )
 
