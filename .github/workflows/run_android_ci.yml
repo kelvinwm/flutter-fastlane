@@ -31,7 +31,7 @@ jobs:
       - name: Run Fastlane
         uses: maierj/fastlane-action@v1.4.0
         with:
-          lane: sync_all_development
+          lane: beta
           subdirectory: ios
 
 

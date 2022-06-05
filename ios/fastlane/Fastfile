@@ -27,18 +27,20 @@ default_platform(:ios)
 platform :ios do
   desc "Description of what the lane does"
   lane :beta do
-    # add actions here: https://docs.fastlane.tools/actions
+      Dir.chdir("../..") do
+          sh "flutter build ipa "
+        end
   end
   lane :sync_all_development do
 #     sync_device_info
     match(
-#     type: "development",
-#      readonly: true,
-#      clone_branch_directly: true,
-#     git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
-
- git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
-  type: "appstore"
+    type: "development",
+     readonly: true,
+     clone_branch_directly: true,
+# #     git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
+#
+#  git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
+#   type: "appstore"
     )
 
 #     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
