@@ -1,4 +1,4 @@
-git_url("git@github.com:kelvinwm/match-demo-certifacates.git")
+git_url("https://github.com/kelvinwm/match-demo-certifacates.git")
 
 storage_mode("git")
 
