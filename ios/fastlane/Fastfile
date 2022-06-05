@@ -32,6 +32,8 @@ platform :ios do
   lane :sync_all_development do
 #     sync_device_info
     match(type: "development",
+     readonly: true,
+     clone_branch_directly: true,
     git_basic_authorization: Base64.strict_encode64("kelvinwm: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"))
 
 #     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")

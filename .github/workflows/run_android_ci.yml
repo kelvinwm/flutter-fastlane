@@ -34,6 +34,21 @@ jobs:
           lane: sync_all_development
           subdirectory: ios
 
+  build_ios:
+    name: Build Flutter (iOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: 2.10.4
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build ios --release --flavor staging --no-codesign
+
       #on:
       #  pull_request:
       #    branches:
