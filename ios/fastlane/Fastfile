@@ -31,7 +31,10 @@ platform :ios do
   end
   lane :sync_all_development do
 #     sync_device_info
-    match(type: "development")
+    match(type: "development",
+    git_basic_authorization: Base64.strict_encode64("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")
+
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
   end
   lane :sync_device_info do
     register_devices(devices_file: "fastlane/devices.txt")
