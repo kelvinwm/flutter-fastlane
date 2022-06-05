@@ -32,16 +32,15 @@ desc "Build ipa"
         )
 
       match(
-#         git_basic_authorization: Base64.strict_encode64("kelvinwm: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"),
         type: 'appstore',
         api_key: api_key,
         readonly: true
       )
+       build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+#         Dir.chdir("../..") do
+#           sh "flutter build ipa"
 
-        Dir.chdir("../..") do
-          sh "flutter build ipa"
-
-     end
+#      end
     end
 
 desc "Build a staging ipa"
