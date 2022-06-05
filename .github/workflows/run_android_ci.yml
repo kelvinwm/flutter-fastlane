@@ -28,6 +28,12 @@ jobs:
         working-directory: ${{ github.workspace }}/ios
         run: bundle install
 
+      - name: Run Fastlane
+        uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: beta
+          subdirectory: ios
+
       #on:
       #  pull_request:
       #    branches:
