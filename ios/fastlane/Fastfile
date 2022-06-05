@@ -43,14 +43,14 @@ desc "Build ipa"
             export_method: "app-store",
             export_options: {
               provisioningProfiles: {
-                  "com.beyondthehorizon.superAction" => "match AppStore com.beyondthehorizon.superAction",
+                  "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
               }
             }
           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
-        Dir.chdir("../..") do
-          sh "flutter build ipa"
+#         Dir.chdir("../..") do
+#           sh "flutter build ipa"
 
      end
     end
