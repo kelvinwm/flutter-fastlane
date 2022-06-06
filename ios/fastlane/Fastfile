@@ -25,7 +25,7 @@ desc "Build ipa"
   lane :build_ipa do
 
        xcversion(version: "13.3")
-       xcode_select "/Applications/Xcode_13.3.app"
+#        xcode_select "/Applications/Xcode_13.3.app"
 
        api_key = app_store_connect_api_key(
          key_id: "K73ZGL55QX",
@@ -40,11 +40,11 @@ desc "Build ipa"
         api_key: api_key,
         readonly: true
       )
-       build_app(
-            workspace: "Runner.xcworkspace",
-            scheme: "Runner",
-            export_method: "app-store"
-          )
+#        build_app(
+#             workspace: "Runner.xcworkspace",
+#             scheme: "Runner",
+#             export_method: "app-store"
+#           )
 
 #        gym(
 # #             configuration: "Release",
@@ -61,10 +61,10 @@ desc "Build ipa"
 #           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
-#         Dir.chdir("../..") do
-#           sh "flutter build ipa"
+        Dir.chdir("../..") do
+          sh "flutter build ipa"
 
-#      end
+     end
     end
 
 desc "Build a staging ipa"
