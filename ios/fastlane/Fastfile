@@ -68,7 +68,6 @@ desc "Build ipa"
 #           )
              gym(
                scheme: options[:target],
-               keychain_password: "0728306459",
                clean: true,
                silent: true,
                skip_package_ipa: true,
