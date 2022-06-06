@@ -103,7 +103,7 @@ desc "Build ipa"
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
         Dir.chdir("../..") do
-              sh "flutter build ipa --export-options-plist=ios/exportOptionsStaging.plist"
+              sh "flutter build ipa --export-options-plist=ios/exportOptions.plist"
 
      end
     end
