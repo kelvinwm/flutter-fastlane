@@ -66,14 +66,28 @@ desc "Build ipa"
 #             scheme: "Runner",
 #             export_method: "app-store"
 #           )
+             gym(
+               scheme: options[:target],
+               clean: true,
+               silent: true,
+               skip_package_ipa: true,
+               export_method: "development",
+                export_options: {
+              provisioningProfiles: {
+                "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
+              }
+            },
+               configuration: "Debug",
+               clean:true
+             )
 
-       gym(
-            configuration: "Release",
-            skip_package_ipa: true,
-            workspace: "Runner.xcworkspace",
-            scheme: "Runner",
-            export_method: "app-store",
-            clean: true
+#        gym(
+#             configuration: "Release",
+#             skip_package_ipa: true,
+#             workspace: "Runner.xcworkspace",
+#             scheme: "Runner",
+#             export_method: "app-store",
+#             clean: true
 #             export_method: "development",
 #             export_options: {
 #             compileBitcode: false,
@@ -81,7 +95,7 @@ desc "Build ipa"
 #                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
 #               }
 #             }
-          )
+#           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
 #         Dir.chdir("../..") do
