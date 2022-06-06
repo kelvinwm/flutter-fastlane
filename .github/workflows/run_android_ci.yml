@@ -30,9 +30,9 @@ jobs:
         with:
           flutter-version: 2.10.4
 
-      - name: Install iOS Gems
-        working-directory: ${{ github.workspace }}/ios
-        run: bundle install
+#      - name: Install iOS Gems
+#        working-directory: ${{ github.workspace }}/ios
+#        run: bundle install
 
       - name: Run Fastlane
         uses: maierj/fastlane-action@v1.4.0
