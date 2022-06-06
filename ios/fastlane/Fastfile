@@ -19,8 +19,17 @@ platform :ios do
 
 before_all do
     ENV["MATCH_PASSWORD"] = "0728306459"
+    create_temp_keychain("kelvinwmblogs@gmail.com","0728306459")
 end
 
+def create_temp_keychain(name, password)
+  create_keychain(
+    name: name,
+    password: password,
+    unlock: false,
+    timeout: false
+  )
+end
 desc "Build ipa"
   lane :build_ipa do
 
