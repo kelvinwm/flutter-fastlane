@@ -68,12 +68,11 @@ desc "Build ipa"
 #             keychain_name: "kelvinwmblogs@gmail.com"
            )
 
-
-#        build_app(
-#             workspace: "Runner.xcworkspace",
-#             scheme: "Runner",
-#             export_method: "app-store"
-#           )
+       build_app(
+            workspace: "Runner.xcworkspace",
+            scheme: "Runner",
+            export_method: "app-store"
+          )
 #              gym(
 #                scheme: options[:target],
 #                clean: true,
@@ -106,18 +105,14 @@ desc "Build ipa"
 #           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
-        Dir.chdir("../..") do
-              sh "flutter build ipa"
-              upload_to_testflight(
-                           api_key: api_key,
-#                            ipa: "../build/ios/ipa/flutter_fastlane.ipa",
-                           skip_waiting_for_build_processing: true
-                        )
-
+#         Dir.chdir("../..") do
+#               sh "flutter build ipa"
 #               upload_to_testflight(
-#               ipa: "../build/ios/ipa/flutterfastlane.ipa"
-#               )
-     end
+#                            api_key: api_key,
+# #                            ipa: "../build/ios/ipa/flutter_fastlane.ipa",
+#                            skip_waiting_for_build_processing: true
+#                         )
+#      end
     end
 
 desc "Build a staging ipa"
