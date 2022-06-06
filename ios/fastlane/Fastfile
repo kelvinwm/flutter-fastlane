@@ -36,24 +36,24 @@ desc "Build ipa"
         api_key: api_key,
         readonly: true
       )
-#        gym(
-#             configuration: "Release",
-#             workspace: "Runner.xcworkspace",
-#             scheme: "Runner",
-# #             export_method: "app-store",
-#             export_method: "development",
-#             export_options: {
-#               provisioningProfiles: {
-#                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-#               }
-#             }
-#           )
+       gym(
+            configuration: "Release",
+            workspace: "Runner.xcworkspace",
+            scheme: "Runner",
+#             export_method: "app-store",
+            export_method: "development",
+            export_options: {
+              provisioningProfiles: {
+                  "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
+              }
+            }
+          )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
-        Dir.chdir("../..") do
-          sh "flutter build ipa"
+#         Dir.chdir("../..") do
+#           sh "flutter build ipa"
 
-     end
+#      end
     end
 
 desc "Build a staging ipa"
