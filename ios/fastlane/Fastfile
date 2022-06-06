@@ -41,7 +41,7 @@ desc "Build ipa"
             workspace: "Runner.xcworkspace",
             scheme: "Runner",
 #             export_method: "app-store",
-#             export_method: "development",
+            export_method: "development",
 #             export_options: {
 #               provisioningProfiles: {
 #                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
