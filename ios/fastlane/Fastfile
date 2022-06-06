@@ -65,20 +65,17 @@ desc "Build ipa"
           api_key: api_key
         )
 
-        current_build_number = previous_build_number + 1
+         match(
+                type: 'appstore',
+                api_key: api_key,
+                readonly: is_ci
+               )
 
+        build_number = latest_testflight_build_number + 1 # Get build number
 
-        increment_build_number(
-         build_number: current_build_number)
-
-       increment_version_number_in_plist
-       increment_version_number
-
-      match(
-            type: 'appstore',
-            api_key: api_key,
-            readonly: is_ci
-           )
+        increment_build_number({ # Increment build number
+            build_number: build_number
+        })
 
        gym(
             configuration: "Release",
@@ -88,20 +85,19 @@ desc "Build ipa"
             export_method: "app-store",
             clean: true
           )
-        pilot(
 
-              skip_waiting_for_build_processing: true,
-              skip_submission: true,
-              distribute_external: false,
-              notify_external_testers: false,
-              ipa: "./Runner.ipa"
-            )
-#       upload_to_testflight(
-#                    api_key: api_key,
-#                    skip_waiting_for_build_processing: true,
-#                    build_number: current_build_number.to_s,
-#                    app_version: increment_version_number.to_s
-#                 )
+#         pilot(
+#
+#               skip_waiting_for_build_processing: true,
+#               skip_submission: true,
+#               distribute_external: false,
+#               notify_external_testers: false,
+#               ipa: "./Runner.ipa"
+#             )
+      upload_to_testflight(
+                   api_key: api_key,
+                   skip_waiting_for_build_processing: true
+                )
     end
 
 desc "Build a staging ipa"
