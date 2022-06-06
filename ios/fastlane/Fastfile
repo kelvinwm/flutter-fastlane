@@ -19,20 +19,31 @@ platform :ios do
 
 before_all do
     ENV["MATCH_PASSWORD"] = "0728306459"
-    create_temp_keychain("kelvinwmblogs@gmail.com","0728306459")
+end
+
+
+def ensure_temp_keychain(name, password)
+  delete_temp_keychain(name)
+  create_temp_keychain(name, password)
 end
 
 def create_temp_keychain(name, password)
   create_keychain(
     name: name,
     password: password,
-    unlock: false,
-    timeout: false
+    unlock: false
   )
 end
+
+def delete_temp_keychain(name)
+  delete_keychain(
+    name: name
+  ) if File.exist? File.expand_path("~/Library/Keychains/#{name}-db")
+end
+
 desc "Build ipa"
   lane :build_ipa do
-
+    ensure_temp_keychain("kelvinwmblogs@gmail.com","0728306459")
        xcversion(version: "13.0")
        xcode_select "/Applications/Xcode_13.0.app"
 
