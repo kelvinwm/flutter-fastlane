@@ -68,11 +68,11 @@ desc "Build ipa"
 #             keychain_name: "kelvinwmblogs@gmail.com"
            )
 
-       build_app(
-            workspace: "Runner.xcworkspace",
-            scheme: "Runner",
-            export_method: "app-store"
-          )
+#        build_app(
+#             workspace: "Runner.xcworkspace",
+#             scheme: "Runner",
+#             export_method: "app-store"
+#           )
 #              gym(
 #                scheme: options[:target],
 #                clean: true,
@@ -88,21 +88,22 @@ desc "Build ipa"
 #                clean:true
 #              )
 
-#        gym(
-#             configuration: "Release",
-#             skip_package_ipa: true,
-#             workspace: "Runner.xcworkspace",
-#             scheme: "Runner",
-#             export_method: "app-store",
-#             clean: true
-# #             export_method: "development",
-# #             export_options: {
-# #             compileBitcode: false,
-# #               provisioningProfiles: {
-# #                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-# #               }
-# #             }
-#           )
+       gym(
+            configuration: "Release",
+            skip_package_ipa: true,
+            workspace: "Runner.xcworkspace",
+            scheme: "Runner",
+            export_method: "app-store",
+            clean: true
+#             export_method: "development",
+#             export_options: {
+#             compileBitcode: false,
+#               provisioningProfiles: {
+#                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
+#               }
+#             }
+          )
+
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
 #         Dir.chdir("../..") do
