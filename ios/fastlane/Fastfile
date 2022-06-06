@@ -108,7 +108,14 @@ desc "Build ipa"
 
         Dir.chdir("../..") do
               sh "flutter build ipa"
-              upload_to_testflight()
+              upload_to_testflight(
+                           api_key: api_key,
+                           ipa: "../build/ios/ipa/flutterfastlane.ipa"
+                           skip_waiting_for_build_processing: true
+                        )
+#               upload_to_testflight(
+#               ipa: "../build/ios/ipa/flutterfastlane.ipa"
+#               )
      end
     end
 
