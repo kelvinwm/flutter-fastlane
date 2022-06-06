@@ -69,7 +69,6 @@ desc "Build ipa"
 
        gym(
 #             configuration: "Release",
-            sdk: "iphoneos11.4",
             workspace: "Runner.xcworkspace",
             scheme: "Runner",
             export_method: "app-store",
