@@ -110,9 +110,10 @@ desc "Build ipa"
               sh "flutter build ipa"
               upload_to_testflight(
                            api_key: api_key,
-                           ipa: "../build/ios/ipa/flutterfastlane.ipa"
+                           ipa: "../build/ios/ipa/flutter_fastlane.ipa",
                            skip_waiting_for_build_processing: true
                         )
+
 #               upload_to_testflight(
 #               ipa: "../build/ios/ipa/flutterfastlane.ipa"
 #               )
