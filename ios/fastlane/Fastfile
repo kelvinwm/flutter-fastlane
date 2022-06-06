@@ -34,23 +34,29 @@ desc "Build ipa"
         )
 
       match(
-        type: 'appstore',
+        type: 'development',
         api_key: api_key,
         readonly: true
       )
-       gym(
-#             configuration: "Release",
+       build_app(
             workspace: "Runner.xcworkspace",
             scheme: "Runner",
-            export_method: "app-store",
-#             export_method: "development",
-#             export_options: {
-#             compileBitcode: false,
-#               provisioningProfiles: {
-#                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-#               }
-#             }
+            export_method: "development"
           )
+
+#        gym(
+# #             configuration: "Release",
+#             workspace: "Runner.xcworkspace",
+#             scheme: "Runner",
+#             export_method: "app-store",
+# #             export_method: "development",
+# #             export_options: {
+# #             compileBitcode: false,
+# #               provisioningProfiles: {
+# #                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
+# #               }
+# #             }
+#           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
 #         Dir.chdir("../..") do
