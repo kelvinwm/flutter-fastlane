@@ -40,7 +40,7 @@ desc "Build ipa"
             configuration: "Release",
             workspace: "Runner.xcworkspace",
             scheme: "Runner",
-            export_method: "app-store",
+#             export_method: "app-store",
 #             export_method: "development",
             export_options: {
               provisioningProfiles: {
