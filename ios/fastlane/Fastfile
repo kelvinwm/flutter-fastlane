@@ -59,7 +59,9 @@ desc "Build ipa"
       match(
         type: 'appstore',
         api_key: api_key,
-        readonly: is_ci
+        readonly: is_ci,
+        keychain_password:"0728306459",
+        keychain_name: "kelvinwmblogs@gmail.com"
       )
 #        build_app(
 #             workspace: "Runner.xcworkspace",
@@ -71,12 +73,12 @@ desc "Build ipa"
                clean: true,
                silent: true,
                skip_package_ipa: true,
-               export_method: "development",
-                export_options: {
-              provisioningProfiles: {
-                "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-              }
-            },
+               export_method: "app-store",
+#                export_options: {
+#               provisioningProfiles: {
+#                 "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
+#                   }
+#                 },
                configuration: "Debug",
                clean:true
              )
