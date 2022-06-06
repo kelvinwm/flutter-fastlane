@@ -37,16 +37,16 @@ desc "Build ipa"
         readonly: true
       )
        gym(
-            configuration: "Release",
+#             configuration: "Release",
             workspace: "Runner.xcworkspace",
             scheme: "Runner",
 #             export_method: "app-store",
 #             export_method: "development",
-            export_options: {
-              provisioningProfiles: {
-                  "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-              }
-            }
+#             export_options: {
+#               provisioningProfiles: {
+#                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
+#               }
+#             }
           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
