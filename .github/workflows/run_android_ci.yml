@@ -15,10 +15,10 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      - name: Install Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.7'
+#      - name: Install Ruby
+#        uses: ruby/setup-ruby@v1
+#        with:
+#          ruby-version: '2.7'
       - name: Install Java
         uses: actions/setup-java@v1
         with:
