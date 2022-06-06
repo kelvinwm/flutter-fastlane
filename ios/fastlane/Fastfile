@@ -57,12 +57,14 @@ desc "Build ipa"
         )
 
       match(
-        type: 'appstore',
-        api_key: api_key,
-        readonly: is_ci,
-        keychain_password:"0728306459",
-        keychain_name: "kelvinwmblogs@gmail.com"
-      )
+            type: 'appstore',
+            api_key: api_key,
+            readonly: is_ci
+#             keychain_password:"0728306459",
+#             keychain_name: "kelvinwmblogs@gmail.com"
+           )
+
+
 #        build_app(
 #             workspace: "Runner.xcworkspace",
 #             scheme: "Runner",
