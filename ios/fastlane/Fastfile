@@ -24,6 +24,7 @@ end
 desc "Build ipa"
   lane :build_ipa do
        xcversion(version: "13.0")
+       xcode_select "/Applications/Xcode13.app"
        api_key = app_store_connect_api_key(
          key_id: "K73ZGL55QX",
          issuer_id: "059aa589-88cb-48fb-b7c5-4aa58ba52aed",
