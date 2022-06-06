@@ -32,7 +32,7 @@ desc "Build ipa"
         )
 
       match(
-        type: 'development',
+        type: 'appstore',
         api_key: api_key,
         readonly: true
       )
