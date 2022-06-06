@@ -34,14 +34,14 @@ desc "Build ipa"
         )
 
       match(
-        type: 'development',
+        type: 'appstore',
         api_key: api_key,
         readonly: true
       )
        build_app(
             workspace: "Runner.xcworkspace",
             scheme: "Runner",
-            export_method: "development"
+            export_method: "app-store"
           )
 
 #        gym(
