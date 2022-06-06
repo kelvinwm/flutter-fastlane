@@ -19,6 +19,7 @@ platform :ios do
 
 before_all do
     ENV["MATCH_PASSWORD"] = "0728306459"
+    ensure_temp_keychain("kelvinwmblogs@gmail.com","0728306459")
 end
 
 
@@ -43,7 +44,6 @@ end
 
 desc "Build ipa"
   lane :build_ipa do
-    ensure_temp_keychain("kelvinwmblogs@gmail.com","0728306459")
        xcversion(version: "13.0")
        xcode_select("/Applications/Xcode_13.0.app")
        ensure_xcode_version(version: "13.0")
@@ -70,20 +70,20 @@ desc "Build ipa"
 #             scheme: "Runner",
 #             export_method: "app-store"
 #           )
-             gym(
-               scheme: options[:target],
-               clean: true,
-               silent: true,
-               skip_package_ipa: true,
-               export_method: "app-store",
-#                export_options: {
-#               provisioningProfiles: {
-#                 "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-#                   }
-#                 },
-               configuration: "Debug",
-               clean:true
-             )
+#              gym(
+#                scheme: options[:target],
+#                clean: true,
+#                silent: true,
+#                skip_package_ipa: true,
+#                export_method: "app-store",
+# #                export_options: {
+# #               provisioningProfiles: {
+# #                 "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
+# #                   }
+# #                 },
+#                configuration: "Debug",
+#                clean:true
+#              )
 
 #        gym(
 #             configuration: "Release",
@@ -102,10 +102,10 @@ desc "Build ipa"
 #           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
-#         Dir.chdir("../..") do
-#           sh "flutter build ipa"
-#
-#      end
+        Dir.chdir("../..") do
+              sh "flutter build ipa --export-options-plist=ios/exportOptionsStaging.plist"
+
+     end
     end
 
 desc "Build a staging ipa"
