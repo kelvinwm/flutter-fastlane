@@ -44,14 +44,14 @@ end
 
 desc "Build ipa"
   lane :build_ipa do
-       xcversion(version: "13.0")
-       xcode_select("/Applications/Xcode_13.0.app")
-       ensure_xcode_version(version: "13.0")
-        setup_ci
-        sync_code_signing(
-          type: "appstore",
-          readonly: is_ci
-        )
+#        xcversion(version: "13.0")
+#        xcode_select("/Applications/Xcode_13.0.app")
+#        ensure_xcode_version(version: "13.0")
+#        setup_ci
+#        sync_code_signing(
+#           type: "appstore",
+#           readonly: is_ci
+#         )
 
        api_key = app_store_connect_api_key(
          key_id: "K73ZGL55QX",
@@ -61,35 +61,23 @@ desc "Build ipa"
          in_house: false
         )
 
-      increment_build_number
+        previous_build_number = latest_testflight_build_number(
+          api_key: api_key
+        )
+
+        current_build_number = previous_build_number + 1
+
+        increment_build_number(
+          build_number: current_build_number
+        )
+
+       increment_version_number_in_plist
 
       match(
             type: 'appstore',
             api_key: api_key,
             readonly: is_ci
-#             keychain_password:"0728306459",
-#             keychain_name: "kelvinwmblogs@gmail.com"
            )
-
-#        build_app(
-#             workspace: "Runner.xcworkspace",
-#             scheme: "Runner",
-#             export_method: "app-store"
-#           )
-#              gym(
-#                scheme: options[:target],
-#                clean: true,
-#                silent: true,
-#                skip_package_ipa: true,
-#                export_method: "app-store",
-# #                export_options: {
-# #               provisioningProfiles: {
-# #                 "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-# #                   }
-# #                 },
-#                configuration: "Debug",
-#                clean:true
-#              )
 
        gym(
             configuration: "Release",
@@ -98,25 +86,12 @@ desc "Build ipa"
             scheme: "Runner",
             export_method: "app-store",
             clean: true
-#             export_method: "development",
-#             export_options: {
-#             compileBitcode: false,
-#               provisioningProfiles: {
-#                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
-#               }
-#             }
           )
 
-#        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-
-#         Dir.chdir("../..") do
-#               sh "flutter build ipa"
-              upload_to_testflight(
-                           api_key: api_key,
-#                            ipa: "../build/ios/ipa/flutter_fastlane.ipa",
-                           skip_waiting_for_build_processing: true
-                        )
-#      end
+#       upload_to_testflight(
+#                    api_key: api_key,
+#                    skip_waiting_for_build_processing: true
+#                 )
     end
 
 desc "Build a staging ipa"
