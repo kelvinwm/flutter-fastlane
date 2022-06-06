@@ -68,7 +68,8 @@ desc "Build ipa"
 #           )
 
        gym(
-#             configuration: "Release",
+            configuration: "Release",
+            skip_package_ipa: true,
             workspace: "Runner.xcworkspace",
             scheme: "Runner",
             export_method: "app-store",
