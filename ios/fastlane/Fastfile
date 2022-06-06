@@ -92,8 +92,7 @@ desc "Build ipa"
       upload_to_testflight(
                    api_key: api_key,
                    skip_waiting_for_build_processing: true,
-                   build_number: current_build_number,
-                   app_version: increment_version_number_in_plist
+                   build_number: current_build_number.to_s
                 )
     end
 
