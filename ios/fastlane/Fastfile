@@ -19,7 +19,7 @@ platform :ios do
 
 before_all do
     ENV["MATCH_PASSWORD"] = "0728306459"
-    ensure_temp_keychain("kelvinwmblogs@gmail.com","0728306459")
+#     ensure_temp_keychain("kelvinwmblogs@gmail.com","0728306459")
 end
 
 
@@ -48,7 +48,6 @@ desc "Build ipa"
        xcode_select("/Applications/Xcode_13.0.app")
        ensure_xcode_version(version: "13.0")
         setup_ci
-
         sync_code_signing(
           type: "appstore",
           readonly: is_ci
@@ -90,13 +89,13 @@ desc "Build ipa"
 #                clean:true
 #              )
 
-#        gym(
-#             configuration: "Release",
-#             skip_package_ipa: true,
-#             workspace: "Runner.xcworkspace",
-#             scheme: "Runner",
-#             export_method: "app-store",
-#             clean: true
+       gym(
+            configuration: "Release",
+            skip_package_ipa: true,
+            workspace: "Runner.xcworkspace",
+            scheme: "Runner",
+            export_method: "app-store",
+            clean: true
 #             export_method: "development",
 #             export_options: {
 #             compileBitcode: false,
@@ -104,13 +103,13 @@ desc "Build ipa"
 #                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
 #               }
 #             }
-#           )
+          )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
-        Dir.chdir("../..") do
-              sh "flutter build ipa --export-options-plist=ios/exportOptions.plist"
+#         Dir.chdir("../..") do
+#               sh "flutter build ipa --export-options-plist=ios/exportOptions.plist"
 
-     end
+#      end
     end
 
 desc "Build a staging ipa"
