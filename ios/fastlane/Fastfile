@@ -42,11 +42,12 @@ desc "Build ipa"
             scheme: "Runner",
 #             export_method: "app-store",
             export_method: "development",
-#             export_options: {
+            export_options: {
+            compileBitcode: false,
 #               provisioningProfiles: {
 #                   "com.beyondthehorizon.superAction" => "match Development com.beyondthehorizon.superAction",
 #               }
-#             }
+            }
           )
 #        build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
 
