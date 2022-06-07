@@ -70,6 +70,10 @@ desc "Build ipa"
                 readonly: is_ci
                )
 
+        increment_version_number_in_plist(
+          bump_type: 'patch' # Automatically increment minor version number
+        )
+
       version = get_version_number_from_plist(xcodeproj: "Runner.xcodeproj",build_configuration_name: 'Release')
       current_build_number = latest_testflight_build_number(version: version)
       increment_build_number(
