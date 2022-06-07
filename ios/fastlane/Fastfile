@@ -70,7 +70,7 @@ desc "Build ipa"
                 readonly: is_ci
                )
 
-      version = get_version_number_from_plist(build_configuration_name: 'Release')
+      version = get_version_number_from_plist(xcodeproj: "Runner.xcodeproj",build_configuration_name: 'Release')
       current_build_number = latest_testflight_build_number(version: version)
       increment_build_number(
         build_number: current_build_number + 1
