@@ -71,11 +71,14 @@ desc "Build ipa"
                )
 
         increment_version_number_in_plist(
-          bump_type: 'minor' # Automatically increment minor version number
+          bump_type: 'patch' # Automatically increment minor version number
         )
 
         build_number = previous_build_number + 1
 
+        increment_build_number(
+          build_number: build_number.to_s
+        )
 #        gym(
 #             configuration: "Release",
 #             skip_package_ipa: true,
