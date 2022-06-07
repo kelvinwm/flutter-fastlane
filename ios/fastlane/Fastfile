@@ -44,14 +44,14 @@ end
 
 desc "Build ipa"
   lane :build_ipa do
-       xcversion(version: "13.0")
-       xcode_select("/Applications/Xcode_13.0.app")
-       ensure_xcode_version(version: "13.0")
-       setup_ci
-       sync_code_signing(
-          type: "appstore",
-          readonly: is_ci
-        )
+#        xcversion(version: "13.0")
+#        xcode_select("/Applications/Xcode_13.0.app")
+#        ensure_xcode_version(version: "13.0")
+#        setup_ci
+#        sync_code_signing(
+#           type: "appstore",
+#           readonly: is_ci
+#         )
 
        api_key = app_store_connect_api_key(
          key_id: "K73ZGL55QX",
@@ -74,7 +74,8 @@ desc "Build ipa"
         build_number = latest_testflight_build_number + 1 # Get build number
 
         increment_build_number({ # Increment build number
-            build_number: build_number
+            build_number: build_number,
+            xcodeproj: "Runner.xcodeproj"
         })
 
        gym(
@@ -93,11 +94,12 @@ desc "Build ipa"
 #               distribute_external: false,
 #               notify_external_testers: false,
 #               ipa: "./Runner.ipa"
-#             )
+# #             )
       upload_to_testflight(
                    api_key: api_key,
                    skip_waiting_for_build_processing: true
                 )
+
     end
 
 desc "Build a staging ipa"
