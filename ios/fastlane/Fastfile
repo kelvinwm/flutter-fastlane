@@ -95,7 +95,7 @@ desc "Build ipa"
 # #             )
 
           Dir.chdir("../..") do
-    #        sh "rm ios/Podfile.lock pubspec.lock &&  rm -rf ios/Pods ios/Runner.xcworkspace"
+             sh "rm -rf build/ios/archive/"
     #         sh "flutter build ipa --build-number"
              sh("flutter", "build", "ipa","--build-number=#{build_number}")
           end

@@ -5,52 +5,42 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000186">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000171">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: app_store_connect_api_key" time="0.002018">
+      <testcase classname="fastlane.lanes" name="1: app_store_connect_api_key" time="0.007689">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: latest_testflight_build_number" time="1.996856">
+      <testcase classname="fastlane.lanes" name="2: latest_testflight_build_number" time="1.956556">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: is_ci" time="0.000209">
+      <testcase classname="fastlane.lanes" name="3: is_ci" time="0.000612">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: match" time="7.735857">
+      <testcase classname="fastlane.lanes" name="4: match" time="8.010129">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: increment_version_number_in_plist" time="11.713453">
+      <testcase classname="fastlane.lanes" name="5: increment_version_number_in_plist" time="5.1777">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: get_build_number" time="0.392325">
+      <testcase classname="fastlane.lanes" name="6: rm -rf build/ios/archive/" time="0.031015">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: increment_build_number" time="0.372458">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="8: flutter build ipa --build-number\=2" time="28.484057">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="9: upload_to_testflight" time="47.868207">
+      <testcase classname="fastlane.lanes" name="7: flutter build ipa --build-number\=3" time="24.298864">
         
       </testcase>
     
