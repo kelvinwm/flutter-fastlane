@@ -44,14 +44,14 @@ end
 
 desc "Build ipa"
   lane :build_ipa do
-       xcversion(version: "13.0")
-       xcode_select("/Applications/Xcode_13.0.app")
-       ensure_xcode_version(version: "13.0")
-       setup_ci
-       sync_code_signing(
-          type: "appstore",
-          readonly: is_ci
-        )
+#        xcversion(version: "13.0")
+#        xcode_select("/Applications/Xcode_13.0.app")
+#        ensure_xcode_version(version: "13.0")
+#        setup_ci
+#        sync_code_signing(
+#           type: "appstore",
+#           readonly: is_ci
+#         )
 
        api_key = app_store_connect_api_key(
          key_id: "K73ZGL55QX",
@@ -75,20 +75,16 @@ desc "Build ipa"
           bump_type: 'minor' # Automatically increment minor version number
         )
 
-        get_build_number
-        increment_build_number({ # Increment build number
-            build_number: previous_build_number + 1,
-            xcodeproj: "Runner.xcodeproj"
-        })
+        build_number = previous_build_number + 1
 
-       gym(
-            configuration: "Release",
-            skip_package_ipa: true,
-            workspace: "Runner.xcworkspace",
-            scheme: "Runner",
-            export_method: "app-store",
-            clean: true
-          )
+#        gym(
+#             configuration: "Release",
+#             skip_package_ipa: true,
+#             workspace: "Runner.xcworkspace",
+#             scheme: "Runner",
+#             export_method: "app-store",
+#             clean: true
+#           )
 
 #         pilot(
 #
@@ -99,10 +95,15 @@ desc "Build ipa"
 #               ipa: "./Runner.ipa"
 # #             )
 
+          Dir.chdir("../..") do
+    #        sh "rm ios/Podfile.lock pubspec.lock &&  rm -rf ios/Pods ios/Runner.xcworkspace"
+    #         sh "flutter build ipa --build-number"
+             sh("flutter", "build", "ipa","--build-number=#{build_number}")
+          end
 
       upload_to_testflight(
                    api_key: api_key,
-                   skip_waiting_for_build_processing: true
+                   skip_waiting_for_build_processing: true,
                 )
 
     end
