@@ -60,25 +60,45 @@ desc "Build ipa"
          in_house: false
         )
 
-        previous_build_number = latest_testflight_build_number(
-          api_key: api_key
-        )
+#         previous_build_number = latest_testflight_build_number(
+#           api_key: api_key
+#         )
 
          match(
                 type: 'appstore',
                 api_key: api_key,
                 readonly: is_ci
                )
-        get_version_number_from_plist
-        increment_version_number_in_plist(
-          bump_type: 'patch' # Automatically increment minor version number
-        )
 
-        build_number = previous_build_number + 1
+      version = get_version_number_from_plist(build_configuration_name: 'Release')
+      current_build_number = latest_testflight_build_number(version: version)
+      increment_build_number(
+        build_number: current_build_number + 1
+      )
+      testflight_build = current_build_number + 1
+      gym(
+       scheme: "Runner",
+        export_method: "app-store",
+        configuration: "Release",
+      )
 
-        increment_build_number(
-          build_number: build_number.to_s
-        )
+      pilot(
+        skip_submission: false,
+        distribute_external: false,
+        skip_waiting_for_build_processing: true
+      )
+
+
+#         get_version_number_from_plist
+#         increment_version_number_in_plist(
+#           bump_type: 'patch' # Automatically increment minor version number
+#         )
+#
+#         build_number = previous_build_number + 1
+#
+#         increment_build_number(
+#           build_number: build_number.to_s
+#         )
 #        gym(
 #             configuration: "Release",
 #             skip_package_ipa: true,
@@ -96,17 +116,17 @@ desc "Build ipa"
 #               notify_external_testers: false,
 #               ipa: "./Runner.ipa"
 # #             )
-
-          Dir.chdir("../..") do
-             sh "rm -rf build/ios/archive/"
-    #         sh "flutter build ipa --build-number"
-             sh("flutter", "build", "ipa","--build-number=#{build_number}")
-          end
-
-      upload_to_testflight(
-                   api_key: api_key,
-                   skip_waiting_for_build_processing: true,
-                )
+#
+#           Dir.chdir("../..") do
+#              sh "rm -rf build/ios/archive/"
+#     #         sh "flutter build ipa --build-number"
+#              sh("flutter", "build", "ipa","--build-number=#{build_number}")
+#           end
+#
+#       upload_to_testflight(
+#                    api_key: api_key,
+#                    skip_waiting_for_build_processing: true,
+#                 )
 
     end
 
